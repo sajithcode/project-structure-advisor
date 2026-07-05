@@ -1,0 +1,25 @@
+# Python environments
+venv/
+env/
+.venv/
+
+# Environment variables
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Project specific
+template_index/
+
+# Agent and tool outputs
+_bmad/
+_bmad-output/
+.agents/
+.agent/
+.claude/
+.cline/
+.github
+
