@@ -34,7 +34,7 @@ development_status:
   epic-1: in-progress
   1-1-template-ingestion-system: done
   1-2-semantic-faiss-indexing: done
-  1-3-faiss-local-caching: backlog
+  1-3-faiss-local-caching: done
   epic-1-retrospective: optional
   epic-2: backlog
   2-1-cli-interface-stack-parsing: backlog

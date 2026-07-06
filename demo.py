@@ -2,7 +2,7 @@ import os
 import shutil
 from pathlib import Path
 from advisor.parser import parse_template_directory
-from advisor.indexer import create_faiss_index
+from advisor.indexer import create_faiss_index, load_faiss_index, save_faiss_index
 from tests.test_indexer import FakeEmbeddings
 
 def setup_dummy_templates():
@@ -60,10 +60,20 @@ if __name__ == "__main__":
     print("\n--- 4. Indexing templates with FAISS ---")
     # Using FakeEmbeddings for demo purposes without needing OpenAI keys
     embeddings = FakeEmbeddings()
-    vectorstore = create_faiss_index(parsed_templates, embeddings)
+    
+    # Try to load from cache first
+    vectorstore = load_faiss_index(embeddings)
     
     if vectorstore:
-        print("Successfully created FAISS vector store!")
+        print("Loaded FAISS vector store from local cache!")
+    else:
+        print("Local cache not found. Creating new FAISS vector store...")
+        vectorstore = create_faiss_index(parsed_templates, embeddings)
+        if vectorstore:
+            save_faiss_index(vectorstore)
+            print("Successfully created and saved FAISS vector store to cache!")
+    
+    if vectorstore:
         print("\n--- 5. Semantic Search ---")
         query = "A frontend framework"
         print(f"Searching for: '{query}'")
@@ -76,5 +86,5 @@ if __name__ == "__main__":
     else:
         print("Failed to create FAISS vector store.")
 
-    # Clean up
+    # Clean up (but don't delete cache so user can see it works next time)
     shutil.rmtree(templates_dir)

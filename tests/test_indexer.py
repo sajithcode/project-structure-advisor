@@ -1,7 +1,9 @@
-from unittest.mock import MagicMock
-from advisor.indexer import create_faiss_index
+from unittest.mock import MagicMock, patch
+from advisor.indexer import create_faiss_index, save_faiss_index, load_faiss_index, CACHE_DIR
 from advisor.parser import TemplateModel
 from langchain_core.documents import Document
+from langchain_community.vectorstores import FAISS
+import shutil
 
 from langchain_core.embeddings import Embeddings
 
@@ -34,3 +36,28 @@ def test_create_faiss_index_success():
     assert isinstance(results[0], Document)
     assert results[0].metadata["name"] == "test_1"
     assert "structure" in results[0].metadata
+
+def test_load_and_save_faiss_index(tmp_path):
+    # Setup mock templates
+    templates = [
+        TemplateModel(name="test_cache", description="A test template", structure={})
+    ]
+    mock_embeddings = FakeEmbeddings()
+    vectorstore = create_faiss_index(templates, mock_embeddings)
+    
+    with patch("advisor.indexer.CACHE_DIR", tmp_path / ".advisor_cache" / "faiss_index"):
+        # Initially, cache does not exist
+        assert load_faiss_index(mock_embeddings) is None
+        
+        # Save it
+        save_faiss_index(vectorstore)
+        
+        # Now it should load
+        loaded_vectorstore = load_faiss_index(mock_embeddings)
+        assert loaded_vectorstore is not None
+        assert isinstance(loaded_vectorstore, FAISS)
+        
+        # Test search on loaded index
+        results = loaded_vectorstore.similarity_search("test", k=1)
+        assert len(results) == 1
+        assert results[0].metadata["name"] == "test_cache"
