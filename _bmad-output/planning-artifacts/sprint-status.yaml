@@ -1,0 +1,47 @@
+# generated: 2026-07-06T12:43:00
+# last_updated: 2026-07-06T12:43:00
+# project: project-structure-advisor
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: e:\leo-d\ai\project-structure-advisor\_bmad-output\implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+
+generated: 2026-07-06T12:43:00
+last_updated: 2026-07-06T14:25:00
+project: project-structure-advisor
+project_key: NOKEY
+tracking_system: file-system
+story_location: e:\leo-d\ai\project-structure-advisor\_bmad-output\implementation-artifacts
+
+development_status:
+  epic-1: in-progress
+  1-1-template-ingestion-system: done
+  1-2-semantic-faiss-indexing: done
+  1-3-faiss-local-caching: backlog
+  epic-1-retrospective: optional
+  epic-2: backlog
+  2-1-cli-interface-stack-parsing: backlog
+  2-2-faiss-semantic-retrieval: backlog
+  2-3-lcel-pipeline-composition-execution: backlog
+  2-4-structure-rendering: backlog
+  epic-2-retrospective: optional
+  epic-3: backlog
+  3-1-physical-disk-bootstrapping: backlog
+  epic-3-retrospective: optional

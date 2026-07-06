@@ -16,7 +16,6 @@ template_index/
 
 # Agent and tool outputs
 _bmad/
-_bmad-output/
 .agents/
 .agent/
 .claude/
